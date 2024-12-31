@@ -1,0 +1,22 @@
+{
+	# This part exists so that it's easy to test the module locally--it's not necessary in a real Caddyfile
+	http_port 8081
+	auto_https off
+}
+
+localhost:8081 {
+	route /custom {
+		analytics plausible {
+			host stats.gwen.works
+		}
+
+		# Replace this with any usual handler: file_server, reverse_proxy, etc.
+		header Content-Type text/html
+		respond "<head></head><body>Test</body>fezfzefezfez"
+	}
+	route /default {
+		analytics plausible
+		header Content-Type text/html
+		respond "<head></head><body>Test with default server</body>fezfzeffefez"
+	}
+}
